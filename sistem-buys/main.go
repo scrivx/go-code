@@ -8,13 +8,13 @@ import (
 // Intefaz comun para todos los procesadores de pago
 type PaymentProcessor interface {
 	Process(amout float64) error
-	GetFree()	float64
+	GetFree() float64
 }
 
 // Procesador de tarjeta de credito
 type CreditCardProcessor struct {
 	CardNumber string
-	FreeRate float64
+	FreeRate   float64
 }
 
 func (cc CreditCardProcessor) Process(amout float64) error {
@@ -35,7 +35,7 @@ type PaypalProcessor struct {
 }
 
 func (pp PaypalProcessor) Process(amout float64) error {
-	if amout <= 0{
+	if amout <= 0 {
 		return errors.New("Cantidad no valido")
 	}
 	fmt.Printf("Procesando  $%.2f via Paypal (%s)\n", amout, pp.Email)
@@ -43,13 +43,13 @@ func (pp PaypalProcessor) Process(amout float64) error {
 }
 
 func (pp PaypalProcessor) GetFree() float64 {
-	return 0.029 // 2.9% 
+	return 0.029 // 2.9%
 }
 
 // Procesador de criptomonedas
 type CrypoProcessor struct {
 	WalletAdress string
-	Currency string
+	Currency     string
 }
 
 func (cp CrypoProcessor) Process(amout float64) error {
@@ -97,7 +97,7 @@ func main() {
 	// Creamos diferentes procesadores
 	creditCard := CreditCardProcessor{
 		CardNumber: "1234-5678-9012-3456",
-		FreeRate: 0.035, // 3.5%
+		FreeRate:   0.035, // 3.5%
 	}
 
 	paypal := PaypalProcessor{
@@ -106,7 +106,7 @@ func main() {
 
 	crypto := CrypoProcessor{
 		WalletAdress: "0x1234567890123456789012345678901234567890",
-		Currency: "BTC",
+		Currency:     "BTC",
 	}
 
 	// Polimorfismo en accion
@@ -120,4 +120,3 @@ func main() {
 		fmt.Println()
 	}
 }
-
