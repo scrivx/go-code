@@ -525,7 +525,7 @@ func main() {
 
 	// Crear servicio principal
 	servicio := NuevoServicioNotificaciones()
-	servicio.EstablecerLogger(email) // email tambien funciona como logger}
+	servicio.EstablecerLogger(email) // email tambien funciona como logger
 
 	// Agregar notificadores
 	servicio.AgregarNotificador(email)
