@@ -9,7 +9,9 @@ import (
 )
 
 func downloadURL(url string, wg *sync.WaitGroup) {
-	defer wg.Done() // defer -> sirve para marcar gorutine como terminada
+	if wg != nil {
+		defer wg.Done() // defer -> sirve para marcar gorutine como terminada
+	}
 	inicio := time.Now()
 
 	resp, err := http.Get(url)
@@ -43,7 +45,7 @@ func main() {
 	inicio := time.Now()
 
 	for _, url := range urls {
-		downloadURL(url, &sync.WaitGroup{}) //Dumy WaitGruop => significa
+		downloadURL(url, nil)
 	}
 
 	tiempoSecuencial := time.Since(inicio)
